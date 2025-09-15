@@ -89,6 +89,10 @@ class LectureAdmin(admin.ModelAdmin):
 class NewsTagAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
 
+@admin.register(Partner)
+class PartnerAdmin(admin.ModelAdmin):
+    list_display = ("author",'text1',)
+
 
 @admin.register(NewsItem)
 class NewsItemAdmin(admin.ModelAdmin):

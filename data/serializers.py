@@ -86,6 +86,13 @@ class LectureModuleSerializer(serializers.ModelSerializer):
         model = LectureModule
         fields = "__all__"
 
+class PartnerSerializer(serializers.ModelSerializer):
+    # items = ProgramModuleItemSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Partner
+        fields = "__all__"
+
 class LectureSerializer(serializers.ModelSerializer):
 
 

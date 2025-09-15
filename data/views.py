@@ -26,6 +26,10 @@ class GetTags(generics.ListAPIView):
     serializer_class = TagSerializer
     queryset = NewsTag.objects.all()
 
+class GetParnters(generics.ListAPIView):
+    serializer_class = PartnerSerializer
+    queryset = Partner.objects.all()
+
 class NewsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = NewsItem.objects.all()
     lookup_field = "slug"

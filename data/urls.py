@@ -13,4 +13,5 @@ router.register(r"lecture-formats", LectureFormatViewSet)
 urlpatterns = [
     path("", include(router.urls)),
     path('news_tags', GetTags.as_view()),
+    path('parnters', GetParnters.as_view()),
 ]

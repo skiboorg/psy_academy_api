@@ -532,3 +532,20 @@ class NewsItem(models.Model):
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
+class Partner(models.Model):
+    order_num = models.IntegerField(default=1, null=True)
+    top_image = models.ImageField(
+        upload_to="parnert/images/",
+        verbose_name="Фотография",
+        blank=True,
+        null=True
+    )
+    text = models.TextField('Текст', blank=True, null=True)
+    author = models.CharField('Автор', max_length=255, blank=True, null=True)
+    text1 = models.CharField('Подпись', max_length=255, blank=True, null=True)
+    show_on_main = models.BooleanField('Показывать на главной', default=True, null=False)
+
+    class Meta:
+        ordering = ('order_num',)
+        verbose_name = 'Партнер'
+        verbose_name_plural = 'Партнеры'
