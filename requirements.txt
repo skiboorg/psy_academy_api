@@ -1,0 +1,12 @@
+djangorestframework
+django-cors-headers
+django-environ
+python-dotenv
+djoser
+django-filter
+django-cleanup
+django-ckeditor-5
+
+django-colorfield
+pillow
+pytils
