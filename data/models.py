@@ -255,6 +255,8 @@ class Lecture(models.Model):
         default=0,
         verbose_name="Порядок вывода"
     )
+    tariff = models.ForeignKey('LectureTariff', on_delete=models.CASCADE,blank=True, null=True, verbose_name='Тариф')
+
     name = models.CharField(
         max_length=255,
         verbose_name="Название"
@@ -434,7 +436,7 @@ class LectureModule(models.Model):
         Lecture,
         on_delete=models.CASCADE,
         related_name="lecture_modules",
-        verbose_name="Программа",
+        verbose_name="Лекция",
         null=True,
     )
     name = models.CharField(max_length=255, verbose_name="Название")
@@ -450,6 +452,41 @@ class LectureModule(models.Model):
     class Meta:
         verbose_name = "Модуль обучения"
         verbose_name_plural = "Модули обучения"
+        ordering = ["order"]
+
+    def __str__(self):
+        return f"{self.lecture.name} - {self.name}"
+
+
+class LectureTariff(models.Model):
+    name = models.CharField(max_length=255, verbose_name="Название")
+    order = models.PositiveIntegerField(default=0, verbose_name="Порядок вывода")
+    description = CKEditor5Field(verbose_name="Описание", blank=True, null=True)
+    price = models.PositiveIntegerField(default=0, verbose_name="Цена")
+    price_text = models.CharField(max_length=255, verbose_name="Цена описание")
+
+    class Meta:
+        verbose_name = "Тариф"
+        verbose_name_plural = "Тарифы"
+        ordering = ["order"]
+
+    def __str__(self):
+        return f"{self.name}"
+
+class LectureTariffItem(models.Model):
+    lecture = models.ForeignKey(
+        LectureTariff,
+        on_delete=models.CASCADE,
+        related_name="tariff_items",
+        verbose_name="Тариф",
+        null=True,
+    )
+    name = models.CharField(max_length=255, verbose_name="Текст")
+    order = models.PositiveIntegerField(default=0, verbose_name="Порядок вывода")
+
+    class Meta:
+        verbose_name = "Тариф пункты"
+        verbose_name_plural = "Тариф пункты"
         ordering = ["order"]
 
     def __str__(self):

@@ -78,6 +78,19 @@ class LectureModuleInline(admin.StackedInline):
     extra = 0
 
 
+
+
+
+class LectureTariffItemInline(admin.StackedInline):
+    model = LectureTariffItem
+    extra = 0
+
+@admin.register(LectureTariff)
+class LectureTariffAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+    search_fields = ("id", "name")
+    inlines = [LectureTariffItemInline]
+
 @admin.register(Lecture)
 class LectureAdmin(admin.ModelAdmin):
     list_display = ("id", "name",  "format", "order")

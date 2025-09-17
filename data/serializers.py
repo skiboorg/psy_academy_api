@@ -2,6 +2,19 @@ from rest_framework import serializers
 from .models import *
 
 
+class LectureTariffItemsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LectureTariffItem
+        fields = "__all__"
+
+
+class LectureTariffSerializer(serializers.ModelSerializer):
+    tariff_items = LectureTariffItemsSerializer(many=True, read_only=True)
+    class Meta:
+        model = LectureTariff
+        fields = "__all__"
+
+
 class FacultySerializer(serializers.ModelSerializer):
     class Meta:
         model = Faculty
@@ -94,7 +107,7 @@ class PartnerSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class LectureSerializer(serializers.ModelSerializer):
-
+    tariff = LectureTariffSerializer(read_only=True)
 
     for_items = LectureForItemSerializer(many=True, read_only=True)
     about_items = LectureAboutItemSerializer(many=True, read_only=True)
