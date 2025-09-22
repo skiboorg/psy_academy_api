@@ -73,3 +73,10 @@ class LectureFormatViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = LectureFormat.objects.all()
     serializer_class = LectureFormatSerializer
 
+class LectionFormView(generics.CreateAPIView):
+    queryset = LectionForm.objects.all()
+    serializer_class = LectionFormSerializer
+
+class QFormView(generics.CreateAPIView):
+    queryset = QuestionForm.objects.all()
+    serializer_class = QuestionFormSerializer

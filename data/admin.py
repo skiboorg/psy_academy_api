@@ -112,3 +112,18 @@ class NewsItemAdmin(admin.ModelAdmin):
     list_display = ("id", "name",'created_at','creator')
     list_filter = ("tags",)
     search_fields = ("id", "name","creator__full_name")
+
+
+@admin.register(Publication)
+class PublicationAdmin(admin.ModelAdmin):
+    list_display = ("id", "text",)
+
+
+@admin.register(LectionForm)
+class LectionFormAdmin(admin.ModelAdmin):
+    list_display = ("id", "fio",)
+
+
+@admin.register(QuestionForm)
+class QuestionFormAdmin(admin.ModelAdmin):
+    list_display = ("id", "fio",)

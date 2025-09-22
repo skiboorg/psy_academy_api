@@ -128,6 +128,22 @@ class TagSerializer(serializers.ModelSerializer):
         model = NewsTag
         fields = '__all__'
 
+class PublicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Publication
+        fields = '__all__'
+
+
+class LectionFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LectionForm
+        fields = '__all__'
+
+class QuestionFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = QuestionForm
+        fields = '__all__'
+
 class NewsItemShortSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True,read_only=True)
     class Meta:

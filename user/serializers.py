@@ -46,10 +46,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 class UserStaffSerializer(serializers.ModelSerializer):
     from data.serializers import NewsItemShortSerializer
+    from data.serializers import PublicationSerializer
     biography_items = UserBiographyItemSerializer(many=True, read_only=True)
     file_links = UserFileLinkSerializer(many=True, read_only=True)
     tags = UserTagSerializer(many=True, read_only=True)
     posts = NewsItemShortSerializer(many=True, read_only=True)
+    publications = PublicationSerializer(many=True, read_only=True)
     class Meta:
         model = User
         exclude = ['password','user_permissions','is_superuser','last_login','groups','phone']

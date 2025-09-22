@@ -586,3 +586,46 @@ class Partner(models.Model):
         ordering = ('order_num',)
         verbose_name = 'Партнер'
         verbose_name_plural = 'Партнеры'
+
+
+
+class Publication(models.Model):
+    teachers = models.ManyToManyField(
+        "user.User",
+        limit_choices_to={"is_teacher": True},
+        blank=False,
+        related_name="publications",
+        verbose_name="Относится к  преподаватели"
+    )
+
+    text = models.TextField('Текст', blank=True, null=True)
+    text1 = models.CharField('Подпись', max_length=255, blank=True, null=True)
+    date = models.CharField('Дата', max_length=255, blank=True, null=True)
+    link = models.CharField('Ссылка', max_length=255, blank=True, null=True)
+
+
+    class Meta:
+        verbose_name = 'Научные публикации'
+        verbose_name_plural = 'Научные публикации'
+
+
+class LectionForm(models.Model):
+    fio = models.TextField('ФИО', blank=True, null=True)
+    email = models.CharField('Ваш email', max_length=255, blank=True, null=True)
+    phone = models.CharField('Телефон', max_length=255, blank=True, null=True)
+    page = models.CharField('Название лектория\программы', max_length=255, blank=True, null=True)
+
+
+    class Meta:
+        verbose_name = 'форма заявки со страницы лектория\программы '
+        verbose_name_plural = 'форма заявки со страницы лектория\программы '
+
+
+class QuestionForm(models.Model):
+    fio = models.TextField('ФИО', blank=True, null=True)
+    email = models.CharField('Ваш email', max_length=255, blank=True, null=True)
+    text = models.CharField('Текст', max_length=255, blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'вопросная форма'
+        verbose_name_plural = 'вопросная форма)'

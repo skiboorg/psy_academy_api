@@ -14,4 +14,6 @@ urlpatterns = [
     path("", include(router.urls)),
     path('news_tags', GetTags.as_view()),
     path('parnters', GetParnters.as_view()),
+    path('l_form', LectionFormView.as_view()),
+    path('q_form', QFormView.as_view()),
 ]
