@@ -592,7 +592,6 @@ class Partner(models.Model):
 class Publication(models.Model):
     teachers = models.ManyToManyField(
         "user.User",
-        limit_choices_to={"is_teacher": True},
         blank=False,
         related_name="publications",
         verbose_name="Относится к  преподаватели"
