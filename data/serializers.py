@@ -43,16 +43,34 @@ class ProgramModuleSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class ProgramForItemSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ProgramForItem
+        fields = "__all__"
+
+class ProgramFeatureSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ProgramFeature
+        fields = "__all__"
+
+
 class EducationProgramTagSerializer(serializers.ModelSerializer):
     class Meta:
         model = EducationProgramTag
         fields = ['label']
+
+
 
 class EducationProgramSerializer(serializers.ModelSerializer):
     tags = EducationProgramTagSerializer(many=True, read_only=True)
     about_items = ProgramAboutItemSerializer(many=True, read_only=True)
     modules = ProgramModuleSerializer(many=True, read_only=True)
     format = EducationFormatSerializer(read_only=True)
+    p_for_items = ProgramForItemSerializer(many=True, read_only=True)
+    p_features = ProgramFeatureSerializer(many=True, read_only=True)
+
     class Meta:
         model = EducationProgram
         fields = "__all__"

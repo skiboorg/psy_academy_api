@@ -143,6 +143,11 @@ class EducationProgram(models.Model):
         blank=True,
         null=True
     )
+    video_url = models.TextField(
+        verbose_name="Ссылка на видео",
+        blank=True,
+        null=True
+    )
     is_online = models.BooleanField(
         default=True,
         null=False,
@@ -151,6 +156,12 @@ class EducationProgram(models.Model):
                                   verbose_name="План обучения",
                                   blank=True,
                                   null=True)
+
+    quote_text = models.TextField(
+        verbose_name="Цитата",
+        blank=True,
+        null=True
+    )
 
 
     class Meta:
@@ -165,6 +176,47 @@ class EducationProgram(models.Model):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
+
+class ProgramForItem(models.Model):
+    program = models.ForeignKey(
+        EducationProgram,
+        on_delete=models.CASCADE,
+        related_name="p_for_items",
+        verbose_name="Программа"
+    )
+    svg = models.TextField(verbose_name="КОД SVG", blank=True,
+                           null=True
+                           )
+    name = models.CharField(max_length=255, verbose_name="Заголовок")
+    text = models.TextField(verbose_name="Описание")
+
+    class Meta:
+        verbose_name = "Пункт 'Для кого'"
+        verbose_name_plural = "Пункты 'Для кого'"
+
+
+    def __str__(self):
+        return f"{self.program.name} - {self.name}"
+
+
+class ProgramFeature(models.Model):
+    program = models.ForeignKey(
+        EducationProgram,
+        on_delete=models.CASCADE,
+        related_name="p_features",
+        verbose_name="Программа"
+    )
+    tag = models.CharField(max_length=255, verbose_name="Тег", null=True)
+    name = models.CharField(max_length=255, verbose_name="Заголовок")
+
+    text = models.TextField(verbose_name="Описание")
+
+    class Meta:
+        verbose_name = "Пункт преимущества"
+        verbose_name_plural = "преимущества"
+
+    def __str__(self):
+        return f"{self.program.name} - {self.name}"
 
 class ProgramAboutItem(models.Model):
     BLOCK_TYPES = (

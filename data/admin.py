@@ -11,6 +11,17 @@ class ProgramAboutItemInline(admin.TabularInline):
 
 
 
+class ProgramForItemInline(admin.TabularInline):
+    model = ProgramForItem
+    extra = 0
+
+
+class ProgramFeatureInline(admin.TabularInline):
+    model = ProgramFeature
+    extra = 0
+
+
+
 
 
 class ProgramModuleInline(admin.StackedInline):
@@ -24,7 +35,7 @@ class EducationProgramAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "faculty", "format", "show_on_main", "order")
     list_filter = ("faculty", "format", "show_on_main")
     search_fields = ("id", "name", "faculty__name", "format__name")
-    inlines = [ProgramAboutItemInline, ProgramModuleInline]
+    inlines = [ProgramAboutItemInline, ProgramModuleInline,ProgramForItemInline,ProgramFeatureInline]
 
 
 # ==========================
