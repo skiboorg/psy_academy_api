@@ -100,18 +100,7 @@ class EducationProgram(models.Model):
         blank=True,
         null=True
     )
-    duration = models.CharField(
-        max_length=255,
-        verbose_name="Срок обучения (текстовое)",
-        blank=True,
-        null=True
-    )
-    price = models.CharField(
-        max_length=255,
-        verbose_name="Стоимость (текстовое)",
-        blank=True,
-        null=True
-    )
+
     format = models.ForeignKey(
         EducationFormat,
         on_delete=models.SET_NULL,
@@ -119,12 +108,42 @@ class EducationProgram(models.Model):
         related_name="programs",
         verbose_name="Формат обучения"
     )
+
+    duration = models.CharField(
+        max_length=255,
+        verbose_name="Срок обучения (текстовое)",
+        blank=True,
+        null=True
+    )
+
+    price = models.CharField(
+        max_length=255,
+        verbose_name="Стоимость (текстовое)",
+        blank=True,
+        null=True
+    )
+
     start_date = models.CharField(
         max_length=255,
         verbose_name="Дата начала (текстовое)",
         blank=True,
         null=True
     )
+
+
+    attestat_title= models.CharField(
+        max_length=255,
+        verbose_name="Последнее поле заголовок",
+        blank=True,
+        null=True
+    )
+    attestat_label= models.CharField(
+        max_length=255,
+        verbose_name="Последнее поле текст",
+        blank=True,
+        null=True
+    )
+
     teachers = models.ManyToManyField(
         "user.User",
         limit_choices_to={"is_teacher": True},
@@ -138,7 +157,7 @@ class EducationProgram(models.Model):
         blank=True,
         null=True
     )
-    video_text = models.TextField(
+    video_text = CKEditor5Field(
         verbose_name="Текст на видео блок",
         blank=True,
         null=True
@@ -184,7 +203,7 @@ class ProgramForItem(models.Model):
         related_name="p_for_items",
         verbose_name="Программа"
     )
-    svg = models.TextField(verbose_name="КОД SVG", blank=True,
+    image = models.FileField(verbose_name="Картинка", upload_to='programs/study_for_item/', blank=True,
                            null=True
                            )
     name = models.CharField(max_length=255, verbose_name="Заголовок")
