@@ -67,6 +67,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_teacher = models.BooleanField(default=False,null=False, verbose_name="Преподаватель/Ученик")
     is_staff = models.BooleanField(default=False,null=False, verbose_name="Сотрудник")
     is_manager = models.BooleanField(default=False,null=False, verbose_name="Руководитель")
+    show_at_index = models.BooleanField(default=False,null=False, verbose_name="Показывать на главной")
 
     is_active = models.BooleanField(default=True,null=False, verbose_name="Активный")
     tags = models.ManyToManyField(UserTag,blank=True)

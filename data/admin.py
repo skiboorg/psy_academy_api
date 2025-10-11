@@ -28,6 +28,10 @@ class ProgramModuleInline(admin.StackedInline):
     model = ProgramModule
     extra = 0
 
+class ProgramCaiereItemInline(admin.StackedInline):
+    model = ProgramCaiereItem
+    extra = 0
+
 
 
 @admin.register(EducationProgram)
@@ -35,7 +39,7 @@ class EducationProgramAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "faculty", "format", "show_on_main", "order")
     list_filter = ("faculty", "format", "show_on_main")
     search_fields = ("id", "name", "faculty__name", "format__name")
-    inlines = [ProgramAboutItemInline, ProgramModuleInline,ProgramForItemInline,ProgramFeatureInline]
+    inlines = [ProgramAboutItemInline, ProgramModuleInline,ProgramForItemInline,ProgramFeatureInline,ProgramCaiereItemInline]
 
 
 # ==========================

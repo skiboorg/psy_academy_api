@@ -182,6 +182,23 @@ class EducationProgram(models.Model):
         null=True
     )
 
+    caiere_title = models.TextField(
+        verbose_name="Блок Карьера заголовок",
+        blank=True,
+        null=True
+    )
+    caiere_tag = models.TextField(
+        verbose_name="Блок Карьера тег",
+        blank=True,
+        null=True
+    )
+    caiere_text = models.TextField(
+        verbose_name="Блок Карьера текст",
+        blank=True,
+        null=True
+    )
+
+
 
     class Meta:
         verbose_name = "Программа обучения"
@@ -195,6 +212,33 @@ class EducationProgram(models.Model):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
+class ProgramCaiereItem(models.Model):
+    BLOCK_TYPES = (
+        ('default', "Белый"),
+        ('primary', "Красный"),
+        ('dark', "Темный"),
+    )
+
+    block_type = models.CharField(
+        max_length=10,
+        choices=BLOCK_TYPES,
+        verbose_name="Вид плашки"
+    )
+    program = models.ForeignKey(
+        EducationProgram,
+        on_delete=models.CASCADE,
+        related_name="caiere_items",
+        verbose_name="Программа"
+    )
+    text = models.TextField(verbose_name="Описание")
+
+    class Meta:
+        verbose_name = "Пункт 'Блок Карьера'"
+        verbose_name_plural = "Пункты 'Блок Карьера'"
+
+
+    def __str__(self):
+        return f"{self.program.name} - {self.id}"
 
 class ProgramForItem(models.Model):
     program = models.ForeignKey(

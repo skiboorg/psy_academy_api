@@ -61,6 +61,12 @@ class EducationProgramTagSerializer(serializers.ModelSerializer):
         model = EducationProgramTag
         fields = ['label']
 
+class EducationProgramCaiereItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProgramCaiereItem
+        fields = "__all__"
+
+
 
 
 class EducationProgramSerializer(serializers.ModelSerializer):
@@ -70,7 +76,7 @@ class EducationProgramSerializer(serializers.ModelSerializer):
     format = EducationFormatSerializer(read_only=True)
     p_for_items = ProgramForItemSerializer(many=True, read_only=True)
     p_features = ProgramFeatureSerializer(many=True, read_only=True)
-
+    caiere_items = EducationProgramCaiereItemSerializer(many=True, read_only=True)
     class Meta:
         model = EducationProgram
         fields = "__all__"

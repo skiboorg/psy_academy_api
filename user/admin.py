@@ -37,6 +37,7 @@ class UserAdmin(BaseUserAdmin):
         "is_manager",
         "is_active",
         "is_superuser",
+        "show_at_index",
     )
     inlines = [UserBiographyItemInline, UserFileLinkInline]
     fieldsets = (
@@ -52,7 +53,8 @@ class UserAdmin(BaseUserAdmin):
                 "short_description",
                 "quality",
                 "tags",
-                "work_time"
+                "work_time",
+                "show_at_index"
             )
         }),
         ("Роли", {
