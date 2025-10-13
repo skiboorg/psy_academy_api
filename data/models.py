@@ -169,6 +169,12 @@ class EducationProgram(models.Model):
         blank=True,
         null=True
     )
+    video_image = models.FileField(
+        upload_to="programs/videos/",
+        verbose_name="Видео картинка",
+        blank=True,
+        null=True
+    )
     video_text = CKEditor5Field(
         verbose_name="Текст на видео блок",
         blank=True,
@@ -481,12 +487,18 @@ class Lecture(models.Model):
         blank=True,
         null=True
     )
+    video_image = models.FileField(
+        upload_to="programs/videos/",
+        verbose_name="Видео картинка",
+        blank=True,
+        null=True
+    )
     video_url = models.TextField(
         verbose_name="Ссылка на видео",
         blank=True,
         null=True
     )
-    video_text = models.TextField(
+    video_text = CKEditor5Field(
         verbose_name="Текст на видео блок",
         blank=True,
         null=True
@@ -554,9 +566,9 @@ class LectureForItem(models.Model):
         verbose_name="Программа"
     )
     name = models.CharField(max_length=255, verbose_name="Название")
-    svg = models.TextField( verbose_name="КОД SVG", blank=True,
-        null=True
-    )
+    image = models.FileField(verbose_name="Картинка", upload_to='lecture/study_for_item/', blank=True,
+                             null=True
+                             )
     text = models.TextField(verbose_name="Текст")
 
     order = models.PositiveIntegerField(default=0, verbose_name="Порядок вывода")
@@ -760,11 +772,11 @@ class Publication(models.Model):
 
 
 class LectionForm(models.Model):
-    fio = models.TextField('ФИО', blank=True, null=True)
+    fio = models.CharField('ФИО',max_length=255, blank=True, null=True)
     email = models.CharField('Ваш email', max_length=255, blank=True, null=True)
     phone = models.CharField('Телефон', max_length=255, blank=True, null=True)
     page = models.CharField('Название лектория\программы', max_length=255, blank=True, null=True)
-
+    created_at = models.DateField(auto_now_add=True, null=True)
 
     class Meta:
         verbose_name = 'форма заявки со страницы лектория\программы '
@@ -772,10 +784,11 @@ class LectionForm(models.Model):
 
 
 class QuestionForm(models.Model):
-    fio = models.TextField('ФИО', blank=True, null=True)
+    fio = models.CharField('ФИО',max_length=255, blank=True, null=True)
     email = models.CharField('Ваш email', max_length=255, blank=True, null=True)
-    text = models.CharField('Текст', max_length=255, blank=True, null=True)
-
+    text = models.TextField('Текст',  blank=True, null=True)
+    page = models.CharField('Страница', max_length=255, blank=True, null=True)
+    created_at = models.DateField(auto_now_add=True, null=True)
     class Meta:
         verbose_name = 'вопросная форма'
         verbose_name_plural = 'вопросная форма)'

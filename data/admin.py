@@ -136,9 +136,9 @@ class PublicationAdmin(admin.ModelAdmin):
 
 @admin.register(LectionForm)
 class LectionFormAdmin(admin.ModelAdmin):
-    list_display = ("id", "fio",)
+    list_display = ("created_at", "id", "fio",)
 
 
 @admin.register(QuestionForm)
 class QuestionFormAdmin(admin.ModelAdmin):
-    list_display = ("id", "fio",)
+    list_display = ("created_at", "id", "fio",)
