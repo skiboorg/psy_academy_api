@@ -61,6 +61,18 @@ class EducationProgramTag(models.Model):
         return self.label
 
 class EducationProgram(models.Model):
+    page_title = models.CharField(
+        max_length=255,
+        verbose_name="Title",
+        blank=True,
+        null=True
+    )
+    page_description = models.TextField(
+
+        verbose_name="Description",
+        blank=True,
+        null=True
+    )
     tags = models.ManyToManyField(EducationProgramTag, blank=True,verbose_name="Теги")
     faculty = models.ForeignKey(
         Faculty,
@@ -323,6 +335,7 @@ class ProgramModule(models.Model):
         related_name="modules",
         verbose_name="Программа"
     )
+    tag = models.CharField(max_length=255, verbose_name="Тег", blank=True, null=True)
     name = models.CharField(max_length=255, verbose_name="Название")
     order = models.PositiveIntegerField(default=0, verbose_name="Порядок вывода")
     description = CKEditor5Field(verbose_name="Описание", blank=True, null=True)
@@ -365,7 +378,17 @@ class LectureFormat(models.Model):
 
 
 class Lecture(models.Model):
-
+    page_title = models.CharField(
+        max_length=255,
+        verbose_name="Title",
+        blank=True,
+        null=True
+    )
+    page_description = models.TextField(
+        verbose_name="Description",
+        blank=True,
+        null=True
+    )
     order = models.PositiveIntegerField(
         default=0,
         verbose_name="Порядок вывода"
@@ -414,18 +437,13 @@ class Lecture(models.Model):
         null=True,
         verbose_name="Формат "
     )
-    start_date = models.CharField(
+    card_tag = models.CharField(
         max_length=255,
-        verbose_name="Дата начала (текстовое)",
+        verbose_name="Тег на карточке",
         blank=True,
         null=True
     )
-    end_date = models.CharField(
-        max_length=255,
-        verbose_name="Дата окончания (текстовое)",
-        blank=True,
-        null=True
-    )
+
     date = models.CharField(
         max_length=255,
         verbose_name="Дата проведения",
@@ -460,6 +478,11 @@ class Lecture(models.Model):
     video = models.FileField(
         upload_to="programs/videos/",
         verbose_name="Видео файл",
+        blank=True,
+        null=True
+    )
+    video_url = models.TextField(
+        verbose_name="Ссылка на видео",
         blank=True,
         null=True
     )
@@ -554,6 +577,7 @@ class LectureModule(models.Model):
         verbose_name="Лекция",
         null=True,
     )
+    tag = models.CharField(max_length=255, verbose_name="Тег", blank=True, null=True)
     name = models.CharField(max_length=255, verbose_name="Название")
     order = models.PositiveIntegerField(default=0, verbose_name="Порядок вывода")
     description = CKEditor5Field(verbose_name="Описание", blank=True, null=True)
@@ -630,6 +654,18 @@ class NewsTag(models.Model):
 
 
 class NewsItem(models.Model):
+    page_title = models.CharField(
+        max_length=255,
+        verbose_name="Title",
+        blank=True,
+        null=True
+    )
+    page_description = models.TextField(
+
+        verbose_name="Description",
+        blank=True,
+        null=True
+    )
     order_num = models.IntegerField(default=1, null=True)
     tags = models.ManyToManyField(NewsTag,blank=True,related_name='Теги')
     creator = models.ForeignKey(
